@@ -2,9 +2,7 @@ package com.demo
 
 import com.BaseSpec
 
-/**
-  * Created by Slava on 29/11/2015.
-  */
+
 class HelloWorldTest extends BaseSpec {
 
   val hello = new HelloWorld
