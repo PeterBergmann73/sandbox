@@ -17,13 +17,13 @@ object FileIOUtil {
     }
   }
 
-  def writeToFile(fileName: String, data: String) = {
+  def writeToFile(fileName: String, data: String): Unit = {
     using(new FileWriter(fileName)) {
       fileWriter => fileWriter.write(data)
     }
   }
 
-  def appendToFile(fileName: String, textData: String) = {
+  def appendToFile(fileName: String, textData: String): Unit = {
     using(new FileWriter(fileName, true)) {
       fileWriter => using(new PrintWriter(fileWriter)) {
         printWriter => printWriter.println(s"\n$textData")
