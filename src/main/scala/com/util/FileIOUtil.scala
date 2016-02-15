@@ -23,10 +23,10 @@ object FileIOUtil {
     }
   }
 
-  def appendToFile(fileName: String, textData: String): Unit = {
+  def appendToFile(fileName: String, data: String): Unit = {
     using(new FileWriter(fileName, true)) {
       fileWriter => using(new PrintWriter(fileWriter)) {
-        printWriter => printWriter.println(s"\n$textData")
+        printWriter => printWriter.println(s"\n$data")
       }
     }
   }
