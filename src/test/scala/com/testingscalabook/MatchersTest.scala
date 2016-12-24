@@ -12,4 +12,8 @@ class MatchersTest extends BaseSpec {
     (0.9 - 0.8) should beEqualToTolerance(right = 0.1, tolerance = 0.01)
   }
 
+  "pending test" in {
+    pending
+  }
+
 }
