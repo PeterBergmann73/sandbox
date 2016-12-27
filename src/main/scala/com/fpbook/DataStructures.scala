@@ -20,5 +20,4 @@ object DataStructures {
 
     go(0, 0, as.length - 1)
   }
-
 }
