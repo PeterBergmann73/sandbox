@@ -86,6 +86,7 @@ object BookUtils {
       0.0
     } else {
       def f(x: Double) = (x * x) - n
+
       iterateWhile(2.0)(x => x - f(x) / (2 * x), x => f(x).abs > 1e-14)
     }
   }
