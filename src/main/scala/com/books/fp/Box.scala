@@ -1,4 +1,5 @@
-package com.fpbook
+package com.books
+package fp
 
 final case class Box(height: Double, width: Double)
 

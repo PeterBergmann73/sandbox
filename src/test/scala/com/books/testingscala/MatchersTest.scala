@@ -1,4 +1,5 @@
-package com.testingscalabook
+package com.books
+package testingscala
 
 import com.BaseSpec
 

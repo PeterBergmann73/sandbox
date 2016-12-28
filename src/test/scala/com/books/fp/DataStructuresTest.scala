@@ -1,4 +1,5 @@
-package com.fpbook
+package com.books
+package fp
 
 import com.BaseSpec
 

@@ -1,4 +1,5 @@
-package com.testingscalabook
+package com.books
+package testingscala
 
 import org.scalatest.{FunSpec, Matchers}
 
