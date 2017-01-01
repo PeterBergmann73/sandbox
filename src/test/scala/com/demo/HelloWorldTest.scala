@@ -13,4 +13,10 @@ class HelloWorldTest extends BaseSpec {
     }
   }
 
+  "test brr" should {
+    "trigger test" in {
+      1 should equal(1)
+    }
+  }
+
 }
