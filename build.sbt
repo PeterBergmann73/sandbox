@@ -2,7 +2,8 @@ name := "sandbox"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+// we have to keep the version to be 2.11 to allow compilation for Spark
+scalaVersion := "2.11.0"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1"
 
@@ -25,4 +26,4 @@ libraryDependencies += SpecsModule("specs2-junit")
 
 //libraryDependencies ++= Seq("org.specs2" %% "specs2-core" % "3.8.5" % "test")
 
-// scalacOptions in Test ++= Seq("-Yrangepos")
+scalacOptions in Test ++= Seq("-Yrangepos")
