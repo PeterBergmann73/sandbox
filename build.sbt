@@ -5,11 +5,13 @@ version := "1.0"
 // we have to keep the version to be 2.11 to allow compilation for Spark
 scalaVersion := "2.11.8"
 
-libraryDependencies += "org.apache.spark" %% "spark-core" % "2.0.2"
+libraryDependencies += "org.scala-lang" % "scala-compiler" % scalaVersion.value
+
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.1.0"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 
 def SpecsModule(name: String) = {
   "org.specs2" %% name % "3.6.5" % "test"
