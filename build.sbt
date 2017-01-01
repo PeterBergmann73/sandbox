@@ -5,6 +5,12 @@ version := "1.0"
 // we have to keep the version to be 2.11 to allow compilation for Spark
 scalaVersion := "2.11.8"
 
+val sparkVersion = "2.1.0"
+
+libraryDependencies ++= Seq(
+  "org.apache.spark" %% "spark-core" % sparkVersion
+)
+
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
