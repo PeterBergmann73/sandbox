@@ -17,7 +17,7 @@ import org.apache.hadoop.mapreduce.Reducer
 
 final class MaxClosePriceReducer extends Reducer[Text, FloatWritable, Text, FloatWritable] {
 
-  def reduce(key: Text, values: Iterable[FloatWritable], context: Context) {
+  def reduce(key: Text, values: Iterable[FloatWritable], context: Context): Unit = {
 
     // danv - it could be done simpler
     // but it will require 2 iterations over the values

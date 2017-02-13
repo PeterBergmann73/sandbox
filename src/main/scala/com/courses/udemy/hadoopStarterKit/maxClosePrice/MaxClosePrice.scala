@@ -22,7 +22,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat
 
 final class MaxClosePrice {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     if (args.length != 2) {
       System.err.println("Usage: MaxClosePrice <input path> <output path>")
       System.exit(-1)
@@ -39,7 +39,7 @@ final class MaxClosePrice {
 
     //Set Input and Output formats
     job.setInputFormatClass(classOf[TextInputFormat])
-    job.setOutputFormatClass(classOf[TextOutputFormat[String, Float]])
+    job.setOutputFormatClass(classOf[TextOutputFormat[Text, FloatWritable]])
 
     //Set Mapper and Reduce classes
     job.setMapperClass(classOf[MaxClosePriceMapper])
