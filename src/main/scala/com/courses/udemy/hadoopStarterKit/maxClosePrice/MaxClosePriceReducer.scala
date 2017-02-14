@@ -21,7 +21,7 @@ final class MaxClosePriceReducer extends Reducer[Text, FloatWritable, Text, Floa
 
     // danv - it could be done simpler
     // but it will require 2 iterations over the values
-    // let us keep as it is in the original file
+    // let us keep it as it is in the original file
     // val maxClosePrice: Float = values.map(_.get).max
     var maxClosePrice: Float = scala.Float.MinValue
 

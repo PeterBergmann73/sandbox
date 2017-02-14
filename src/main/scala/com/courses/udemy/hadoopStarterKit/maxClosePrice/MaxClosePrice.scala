@@ -20,7 +20,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat
 
 
-final class MaxClosePrice {
+final class MaxClosePrice
+
+
+object MaxClosePrice {
 
   def main(args: Array[String]): Unit = {
     if (args.length != 2) {
