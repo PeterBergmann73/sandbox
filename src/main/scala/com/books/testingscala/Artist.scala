@@ -1,4 +1,5 @@
 package com.books
 package testingscala
 
-class Artist(val firstName: String, val lastName: String)
+
+final case class Artist(firstName: String, lastName: String)
