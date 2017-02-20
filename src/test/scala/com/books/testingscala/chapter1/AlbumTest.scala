@@ -3,6 +3,7 @@ package testingscala
 package chapter1
 
 
+import com.books.testingscala.chapter3.Artist
 import org.scalatest.{FunSpec, Matchers}
 
 
