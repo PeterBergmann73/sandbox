@@ -23,21 +23,6 @@ class BookUtilsTest extends BaseSpec {
     res1 shouldEqual res1
   }
 
-  "fibonacci" in {
-    import BookUtils.fib
-    val f0 = fib(0)
-    f0 shouldEqual 0
-
-    val f1 = fib(1)
-    f1 shouldEqual 1
-
-    val f2 = fib(2)
-    f2 shouldEqual 1
-
-    val f3 = fib(3)
-    f3 shouldEqual 2
-  }
-
   "sqrt" in {
     import BookUtils.sqrt
     val sqrt0 = sqrt(0.0)

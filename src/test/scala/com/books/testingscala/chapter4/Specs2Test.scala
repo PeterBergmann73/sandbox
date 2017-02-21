@@ -4,16 +4,12 @@ package chapter4
 
 
 import com.books.testingscala.chapter1.Album
+import com.util.Specs2Spec
 import org.specs2.matcher.XmlMatchers
 
 
-// please, note - we are importing the mutable Specification and not normal,
-// as the normal Specification requires "def is"
-import org.specs2.mutable._
-
-
 /** We need XmlMatchers for the xml test below. */
-class Specs2Test extends Specification with XmlMatchers {
+class Specs2Test extends Specs2Spec with XmlMatchers {
 
   "ok" in {
     ok
