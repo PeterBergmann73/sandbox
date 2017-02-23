@@ -70,17 +70,7 @@ trait Tree[+A] {
   // p. 48. EXERCISE 29: Generalize size, maximum, depth, and map, writing a new
   // function fold that abstracts over their similarities. Reimplement them in terms of
   // this more general function.
-  @scala.annotation.tailrec
-  final def fold[B >: A <% Ordered[B]](z: B)(f: (B, B) => B): B = {
-    this match {
-      case NilTree         => z
-      case tn: TreeNode[B] =>
-        val elem: B = f(z, tn.elem)
-        val elems: Seq[B] = (tn.left ++ tn.right).toList
-        val nt: Tree[B] = Tree(elem, elems: _*)
-        nt.fold(elem)(f)
-    }
-  }
+  final def fold[B >: A <% Ordered[B]](z: B)(f: (B, B) => B): B = ???
 
 
   // p. 47 EXERCISE 26: Write a function maximum that returns the maximum element in a Tree[Int].
