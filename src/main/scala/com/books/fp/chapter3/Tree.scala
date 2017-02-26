@@ -7,6 +7,7 @@ import scala.collection.immutable.Queue
 
 
 trait Tree[+A] {
+
   def +[B >: A <% Ordered[B]](elem: B): Tree[B]
 
   def ++[B >: A <% Ordered[B]](bst: Tree[B]): Tree[B]
@@ -70,7 +71,11 @@ trait Tree[+A] {
   // p. 48. EXERCISE 29: Generalize size, maximum, depth, and map, writing a new
   // function fold that abstracts over their similarities. Reimplement them in terms of
   // this more general function.
-  final def fold[B >: A <% Ordered[B]](z: B)(f: (B, B) => B): B = ???
+  final def fold[B >: A <% Ordered[B]](z: B)(f: (B, B) => B): B = this match {
+    case NilTree => z
+    case l       =>
+      l.toList.fold(z)(f)
+  }
 
 
   // p. 47 EXERCISE 26: Write a function maximum that returns the maximum element in a Tree[Int].
@@ -97,7 +102,7 @@ trait Tree[+A] {
 }
 
 
-case object NilTree extends Tree[Nothing] {
+private[chapter3] case object NilTree extends Tree[Nothing] {
   def +[B <% Ordered[B]](elem: B) = Tree(elem)
 
   def ++[B <% Ordered[B]](bst: Tree[B]) = bst
@@ -133,13 +138,23 @@ case object NilTree extends Tree[Nothing] {
   override def toString = "[]"
 }
 
-case class TreeNode[A <% Ordered[A]](elem: A, left: Tree[A], right: Tree[A]) extends Tree[A] {
-  def +[B >: A <% Ordered[B]](newElem: B): TreeNode[_ >: A <: B] =
-    if (newElem < elem) withLeft(left + newElem)
-    else if (newElem > elem) withRight(right + newElem)
-    else this
 
-  def ++[B >: A <% Ordered[B]](bst: Tree[B]): Tree[B] = bst.preOrder[Tree[B]](this)((e, acc) => acc + e)
+private[chapter3] case class TreeNode[A <% Ordered[A]](elem: A, left: Tree[A], right: Tree[A]) extends Tree[A] {
+
+  def +[B >: A <% Ordered[B]](newElem: B): TreeNode[_ >: A <: B] = {
+    if (newElem < elem) {
+      withLeft(left + newElem)
+    } else if (newElem > elem) {
+      withRight(right + newElem)
+    } else {
+      this
+    }
+  }
+
+  def ++[B >: A <% Ordered[B]](bst: Tree[B]): Tree[B] = bst.preOrder[Tree[B]](this) {
+    (e, acc) =>
+      acc + e
+  }
 
   def -[B >: A <% Ordered[B]](e: B): (Option[B], Tree[B]) =
     if (e < elem) left - e match {
@@ -188,9 +203,13 @@ case class TreeNode[A <% Ordered[A]](elem: A, left: Tree[A], right: Tree[A]) ext
     recurse(z, Queue(this))
   }
 
-  def withLeft[B >: A <% Ordered[B]](newLeft: Tree[B]) = TreeNode(elem, newLeft, right)
+  def withLeft[B >: A <% Ordered[B]](newLeft: Tree[B]) = {
+    TreeNode(elem, newLeft, right)
+  }
 
-  def withRight[B >: A <% Ordered[B]](newRight: Tree[B]) = TreeNode(elem, left, newRight)
+  def withRight[B >: A <% Ordered[B]](newRight: Tree[B]) = {
+    TreeNode(elem, left, newRight)
+  }
 
   def minChildAcc[B >: A <% Ordered[B]](acc: Tree[B]): Tree[A] = left.minChildAcc(this)
 
@@ -200,6 +219,7 @@ case class TreeNode[A <% Ordered[A]](elem: A, left: Tree[A], right: Tree[A]) ext
 }
 
 object Tree {
+
   def apply[A <% Ordered[A]](): Tree[A] = NilTree
 
   def apply[A <% Ordered[A]](elem: A, elems: A*): Tree[A] = {

@@ -1,7 +1,4 @@
-package com.books
-package testingscala
-package chapter4
-
+package com.books.testingscala
 
 import com.books.testingscala.chapter1.Album
 import com.util.Specs2Spec
