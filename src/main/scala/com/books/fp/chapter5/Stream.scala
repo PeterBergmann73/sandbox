@@ -161,6 +161,58 @@ trait Stream[+A] {
     case (a, b) => a == b
   }
 
+
+  @scala.annotation.tailrec
+  final def drop(n: Int): Stream[A] = {
+    this match {
+      case Cons(h, t) if n > 0 => t().drop(n - 1)
+      case _                   => empty
+    }
+  }
+
+
+  // p. 74. EXERCISE 14: implement tails using unfold. For a given Stream,
+  // tails returns the Stream of suffixes of the input sequence, starting with the
+  // original Stream. So, given Stream(1,2,3), it would return
+  // Stream(Stream(1,2,3), Stream(2,3), Stream(3), Stream.empty).
+  def tails: Stream[Stream[A]] = {
+    unfold(this) {
+      case Empty => None
+      case s     => Some(s, s.drop(1))
+    }.append(Empty)
+  }
+
+
+  def exists(p: A => Boolean): Boolean =
+    foldRight(false)((a, b) => p(a) || b)
+
+
+  def hasSubsequence[A](s: Stream[A]): Boolean =
+    tails exists (_ startsWith s)
+
+
+  // p. 75. EXERCISE 15 (hard, optional): Generalize tails to the function
+  // scanRight, which is like a foldRight that returns a stream of the
+  // intermediate results.
+  /*
+  The function can't be implemented using `unfold`,
+  since `unfold` generates elements of the `Stream` from left to right.
+  It can be implemented using `foldRight` though.
+  The implementation is just a `foldRight` that keeps the accumulated value and the stream of intermediate results,
+  which we `cons` onto during each iteration.
+  When writing folds, it's common to have more state in the fold than is needed to compute the result.
+  Here, we simply extract the accumulated list once finished.
+  */
+  def scanRight[B](z: B)(f: (A, => B) => B): Stream[B] =
+  foldRight((z, Stream(z))) {
+    case (a, p0) =>
+      // p0 is passed by-name and used in by-name args in f and cons. So use lazy val to ensure only one evaluation...
+      lazy val p1: (B, Stream[B]) = p0
+      val b2: B = f(a, p1._1)
+      (b2, cons(b2, p1._2))
+  }._2
+
+
 }
 
 
