@@ -26,3 +26,18 @@ libraryDependencies += SpecsModule("specs2-scalacheck")
 libraryDependencies += SpecsModule("specs2-junit")
 
 scalacOptions in Test ++= Seq("-Yrangepos")
+
+resolvers += "Sonatype OSS Snapshots" at
+  "https://oss.sonatype.org/content/repositories/snapshots"
+
+libraryDependencies += "com.storm-enroute" %% "scalameter" % "0.7"
+
+
+testFrameworks += new TestFramework(
+  "org.scalameter.ScalaMeterFramework")
+
+
+logBuffered := false
+
+
+parallelExecution in Test := false
