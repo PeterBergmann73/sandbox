@@ -19,7 +19,7 @@ class ProtobufTest
     val person = Person(name = Some("Peter"), id = Some(1218))
     val r: String = JsonFormat.toJsonString(person)
     val j: JValue = JsonFormat.toJson(person)
-    val p: Person = JsonFormat.fromJson(j)
+    val p: Person = JsonFormat.fromJson[Person](j)
 
     ok
   }
